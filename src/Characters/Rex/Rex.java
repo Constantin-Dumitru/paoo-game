@@ -16,7 +16,7 @@ public class Rex extends JPanel {
     private BufferedImage[] walkingRightAnimation;
     private BufferedImage[] walkingLeftAnimation;
     private int aniIndex = 0;
-    private final int aniSpeed = 40;
+    private final int aniSpeed = 20;
 
     private long lastUpdateTime = System.currentTimeMillis();
     private int playerAction = 1;
