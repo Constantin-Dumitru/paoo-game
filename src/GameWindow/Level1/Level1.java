@@ -23,6 +23,9 @@ public class Level1 extends JLayeredPane {
         rex.requestFocusInWindow();
         rex.setOpaque(false);
 
+        // Set the character's position based on the hitbox's position
+        rex.setCharacterPosition(100, 200); // replace 100, 200 with the desired x and y coordinates
+
         GameMap gameMap = new GameMap("shared/map/sample.txt", "shared/map/tiledata.txt", "shared/map/tiles");
         gameMap.setOpaque(false);
 
