@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
+import Characters.Rex.Camera;
 
 public class GameMap extends JPanel {
+
+    private Camera camera;
     private int[][] map;
     private int height;
     private int width;
@@ -23,7 +26,8 @@ public class GameMap extends JPanel {
     private int tileWidth = 44; // replace with your custom tile width
     private int tileHeight = 44; // replace with your
 
-    public GameMap(String mapFilename, String tileDataFilename, String tilesFolder) {
+    public GameMap(String mapFilename, String tileDataFilename, String tilesFolder, Camera camera) {
+        this.camera = camera;
         try {
             loadMap(mapFilename);
             loadTileset(tileDataFilename, tilesFolder);
@@ -72,16 +76,28 @@ public class GameMap extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        int startX = Math.max(0, camera.getX() / tileWidth);
+        int startY = Math.max(0, camera.getY() / tileHeight);
+        int endX = Math.min(width, (camera.getX() + 1280) / tileWidth);
+        int endY = Math.min(height, (camera.getY() + 720) / tileHeight);
+        for (int i = startY; i < endY; i++) {
+            for (int j = startX; j < endX; j++) {
                 int tile = map[i][j];
                 if (tile < tilesetImages.size()) {
-                    g2d.drawImage(tilesetImages.get(tile), j * tileWidth, i * tileHeight, tileWidth, tileHeight, null);
+                    g2d.drawImage(tilesetImages.get(tile), j * tileWidth - camera.getX(), i * tileHeight - camera.getY(), tileWidth, tileHeight, null);
                 } else {
                     System.out.println("Tile value is out of bounds: " + tile);
                 }
             }
         }
+    }
+
+    public int getMapWidth() {
+        return width * tileWidth;
+    }
+
+    public int getMapHeight() {
+        return height * tileHeight;
     }
 
 }

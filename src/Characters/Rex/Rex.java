@@ -115,10 +115,10 @@ public class Rex extends JPanel {
         if (moving){
             switch (playerDir){
                 case Constants.Directions.LEFT:
-                    changeXDelta(-3);
+                    changeXDelta(-2);
                     break;
                 case Constants.Directions.RIGHT:
-                    changeXDelta(3);
+                    changeXDelta(2);
                     break;
             }
         }

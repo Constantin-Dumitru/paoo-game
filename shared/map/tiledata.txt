@@ -7,11 +7,11 @@ false
 04.png
 false
 05.png
-false
+true
 06.png
-false
+true
 07.png
-false
+true
 08.png
 false
 09.png
